@@ -1,13 +1,13 @@
 # Configure Chirpd service
 
 # JAVA Paths
-CHIRP_JAVA_HOME=/etc/alternatives/java_sdk
+JAVA_HOME=/etc/alternatives/java_sdk
 
 # CCTOOLS Path
 CCTOOLS_HOME=/afs/crc.nd.edu/group/ccl/software/cctools
 
 # HADOOP backend
-CHIRP_HADOOP_HOME=/var/chirp/hadoop
+HADOOP_HOME=/var/chirp/hadoop
 
 # Default ACL file
 CHIRP_DEFAULT_ACL=/etc/chirp_acl
