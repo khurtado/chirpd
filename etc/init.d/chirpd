@@ -1,0 +1,90 @@
+#!/bin/sh
+#
+# /etc/init.d/chirp - Start/stop chirpd service
+#
+# The following two lines allow this script to be managed by Fedora's
+# chkconfig program.
+#
+# chkconfig: - 81 31
+# description: Chirp is a personal user-level distributed filesystem that allows unprivileged users to share space securely, efficiently, and conveniently.
+
+#-------------------------------------------------------------------------------
+# Use standard functions library
+#-------------------------------------------------------------------------------
+. /etc/rc.d/init.d/functions
+
+# Source config variables
+if [ -e /etc/sysconfig/xrootd ]; then
+  . /etc/sysconfig/chirpd
+fi
+
+PIDDIR=/var/run/chirp
+CHIRP_PID=$PIDDIR/chirp.pid
+CHIRP_BIN=$CCTOOLS_HOME/x86_64/redhat6/bin/chirp_server
+program='chirpd'
+
+check_directories()
+{
+    CHIRP_LOGDIR=$(dirname $CHIRP_LOG)
+    if [ ! -d $CHIRP_LOGDIR ]; then
+        mkdir -p $CHIRP_LOGDIR
+        chown chirp:chirp $CHIRP_LOGDIR
+    fi
+    if [ ! -d $PIDDIR ]; then
+        mkdir -p $PIDDIR
+        chown chirp:chirp $PIDDIR
+    fi
+}
+
+chirp_start()
+{
+    printf "%-50s\n" "Starting chirpd..."
+    check_directories
+    daemon --pidfile $CHIRP_PID env JAVA_HOME=$CHIRP_JAVA_HOME HADOOP_HOME=$CHIRP_HADOOP_HOME $CHIRP_BIN -i chirp --root=hdfs://${CHIRP_HDFS_HOST}:${CHIRP_HDFS_PORT}${CHIRP_HDFS_LOCATION} -A $CHIRP_DEFAULT_ACL -p $CHIRP_PORT -b -d globus -o $CHIRP_LOG -O $CHIRP_MAX_ROTATE -M $CHIRP_MAX_CLIENTS -B $CHIRP_PID
+    # Sometimes, pid file takes a second to be created
+    sleep 1
+    ## Double check if PID in file is really running and delete PID file otherwise
+    if status -p $CHIRP_PID $program > /dev/null; then
+        printf "%s\n" "chirpd successfully started."
+    else
+        printf "%s" "Failed to check if chirpd stayed running."
+        printf "%s\n" "Failed to start chirpd. Will delete PID file."
+        echo_failure
+        rm $CHIRP_PID
+    fi
+}
+
+chirp_stop()
+{
+    printf "%-50s" "Stopping chirpd"
+        
+    if status -p $CHIRP_PID $program > /dev/null; then
+        killproc -p $CHIRP_PID -KILL
+    else
+        printf "%s\n" "chirpd is not running, nothing to stop."
+    fi
+}
+
+COMMAND=$1
+shift
+
+case "$COMMAND" in
+  'start')
+    chirp_start
+    ;;
+  'stop')
+    chirp_stop
+    ;;
+  'status')
+    status -p $CHIRP_PID "$program"
+    ;;
+  'reload' | 'restart')
+    stop
+    start
+    ;;
+  *)
+    echo "usage: $0 {start|stop|status|restart}"
+    ;;
+esac
+
+exit $?

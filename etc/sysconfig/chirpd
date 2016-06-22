@@ -1,0 +1,34 @@
+# Configure Chirpd service
+
+# JAVA Paths
+CHIRP_JAVA_HOME=/etc/alternatives/java_sdk
+
+# CCTOOLS Path
+CCTOOLS_HOME=/afs/crc.nd.edu/group/ccl/software/cctools
+
+# HADOOP backend
+CHIRP_HADOOP_HOME=/var/chirp/hadoop
+
+# Default ACL file
+CHIRP_DEFAULT_ACL=/etc/chirp_acl
+
+# Output logfile
+CHIRP_LOG=/var/log/chirp/log.debug
+
+# Chirp port
+CHIRP_PORT=9094
+
+# Maximum number of clients
+CHIRP_MAX_CLIENTS=600
+
+# Maximum debug file size before rotating
+CHIRP_MAX_ROTATE=500M
+
+# HDFS port
+CHIRP_HDFS_PORT=19000
+
+# Default location: / for /hadoop
+CHIRP_HDFS_LOCATION='/'
+
+# Default HDFS host to use
+CHIRP_HDFS_HOST='eddie.crc.nd.edu'
