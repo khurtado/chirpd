@@ -30,8 +30,8 @@ CHIRP_MAX_ROTATE=500M
 # HDFS port
 CHIRP_HDFS_PORT=19000
 
-# Default location: / for /hadoop
+# Parent location: / for /hadoop
 CHIRP_HDFS_LOCATION='/'
 
-# Default HDFS host to use
+# HDFS host to use
 CHIRP_HDFS_HOST='eddie.crc.nd.edu'
