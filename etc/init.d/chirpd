@@ -29,6 +29,15 @@ check_directories()
     if [ ! -d $CHIRP_LOGDIR ]; then
         mkdir -p $CHIRP_LOGDIR
         chown chirp:chirp $CHIRP_LOGDIR
+    else
+        if [ -e $CHIRP_LOG ]; then
+            if  [ "$(stat -c '%U' ${CHIRP_LOG})" != "chirp" ]; then
+                chown chirp:chirp $CHIRP_LOG
+            fi
+            if [ "$(stat -c '%a' ${CHIRP_LOG})" != "644" ]; then
+                chmod 644 ${CHIRP_LOG}
+            fi
+        fi
     fi
     if [ ! -d $PIDDIR ]; then
         mkdir -p $PIDDIR
@@ -40,9 +49,7 @@ chirp_start()
 {
     printf "%-50s\n" "Starting chirpd..."
     check_directories
-    #daemon --user chirp --pidfile $CHIRP_PID $CHIRP_BIN --root=hdfs://${CHIRP_HDFS_HOST}:${CHIRP_HDFS_PORT}${CHIRP_HDFS_LOCATION} -A $CHIRP_DEFAULT_ACL -p $CHIRP_PORT -b -d auth -a globus -o $CHIRP_LOG -O $CHIRP_MAX_ROTATE -M $CHIRP_MAX_CLIENTS -B $CHIRP_PID
-    #daemon --user chirp --pidfile $CHIRP_PID env X509_USER_CERT=/etc/grid-security-chirp/hostcert.pem X509_USER_KEY=/etc/grid-security-chirp/hostkey.pem $CHIRP_BIN --inherit-default-acl --root=hdfs://${CHIRP_HDFS_HOST}:${CHIRP_HDFS_PORT}${CHIRP_HDFS_LOCATION} -A $CHIRP_DEFAULT_ACL -p $CHIRP_PORT -b -d all -a globus -o $CHIRP_LOG -O $CHIRP_MAX_ROTATE -M $CHIRP_MAX_CLIENTS -B $CHIRP_PID
-    daemon --user chirp --pidfile $CHIRP_PID $CHIRP_BIN --inherit-default-acl --root=hdfs://${CHIRP_HDFS_HOST}:${CHIRP_HDFS_PORT}${CHIRP_HDFS_LOCATION} -A $CHIRP_DEFAULT_ACL -p $CHIRP_PORT -b -d all -a globus -o $CHIRP_LOG -O $CHIRP_MAX_ROTATE -M $CHIRP_MAX_CLIENTS -B $CHIRP_PID
+    daemon --pidfile $CHIRP_PID $CHIRP_BIN --inherit-default-acl -i chirp --root=hdfs://${CHIRP_HDFS_HOST}:${CHIRP_HDFS_PORT}${CHIRP_HDFS_LOCATION} -A $CHIRP_DEFAULT_ACL -p $CHIRP_PORT -b -d all -a globus -o $CHIRP_LOG -O $CHIRP_MAX_ROTATE -M $CHIRP_MAX_CLIENTS -B $CHIRP_PID
     # Sometimes, pid file takes a second to be created
     sleep 1
     ## Double check if PID in file is really running and delete PID file otherwise
