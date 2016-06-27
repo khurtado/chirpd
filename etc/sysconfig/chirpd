@@ -1,17 +1,27 @@
 # Configure Chirpd service
 
+
+# Export Certificate PAThs
+# export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/certificates
+# export X509_VOMS_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/vomsdir
+# export GLOBUS_LOCATION=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/usr
+
+# Chirp certificates location
+export X509_USER_CERT=/etc/grid-security/chirp/hostcert.pem
+export X509_USER_KEY=/etc/grid-security/chirp/hostkey.pem
+
+# HADOOP backend
+export HADOOP_HOME=/usr/lib/hadoop
+#export HADOOP_HOME=/var/chirp/hadoop
+
+# HDFS library
+export LIBHDFS_PATH=/usr/lib64/libhdfs.so
+
 # JAVA Paths
 export JAVA_HOME=/etc/alternatives/java_sdk
 
 # CCTOOLS Path
 CCTOOLS_HOME=/afs/crc.nd.edu/group/ccl/software/cctools
-
-# HADOOP backend
-export HADOOP_HOME=/usr/lib/hadoop
-
-# HDFS library
-export LIBHDFS_PATH=/usr/lib64/libhdfs.so
-
 # Default ACL file
 CHIRP_DEFAULT_ACL=/etc/chirp_acl
 
@@ -30,8 +40,8 @@ CHIRP_MAX_ROTATE=500M
 # HDFS port
 CHIRP_HDFS_PORT=19000
 
-# Parent location: / for /hadoop
+# Default location: / for /hadoop
 CHIRP_HDFS_LOCATION='/'
 
-# HDFS host to use
+# Default HDFS host to use
 CHIRP_HDFS_HOST='eddie.crc.nd.edu'
