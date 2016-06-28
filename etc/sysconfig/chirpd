@@ -35,7 +35,12 @@ CHIRP_PORT=9094
 CHIRP_MAX_CLIENTS=600
 
 # Maximum debug file size before rotating
-CHIRP_MAX_ROTATE=500M
+# Default: 0 to let logrotate handle this
+CHIRP_MAX_ROTATE=0
+#CHIRP_MAX_ROTATE=500M
+
+# Chirp Debug level
+CHIRP_DEBUG='auth'
 
 # HDFS port
 CHIRP_HDFS_PORT=19000

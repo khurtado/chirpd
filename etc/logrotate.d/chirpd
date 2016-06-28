@@ -1,0 +1,9 @@
+{
+  missingok
+  nomail
+  nocreate
+  rotate 10
+  notifempty
+  daily
+  compress
+}
