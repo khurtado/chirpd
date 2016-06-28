@@ -1,10 +1,11 @@
 # Configure Chirpd service
 
 
-# Export Certificate PAThs
-export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/certificates
-export X509_VOMS_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/vomsdir
-export GLOBUS_LOCATION=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/usr
+# Export Certificate PATHs
+# To do: Check if default CRLs are up-to-date or use cvmfs (if available)
+#export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/certificates
+#export X509_VOMS_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/vomsdir
+#export GLOBUS_LOCATION=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/usr
 
 # Chirp certificates location
 export X509_USER_CERT=/etc/grid-security/chirp/hostcert.pem
