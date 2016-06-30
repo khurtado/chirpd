@@ -1,10 +1,10 @@
 # Configure Chirpd service
 
-# Export Certificate PATHs
-# To do: Check if default CRLs are up-to-date or use cvmfs (if available)
-#export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/certificates
-#export X509_VOMS_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/vomsdir
-#export GLOBUS_LOCATION=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/usr
+
+# Export Certificate PAThs
+export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/certificates
+export X509_VOMS_DIR=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/etc/grid-security/vomsdir
+export GLOBUS_LOCATION=/cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/3.3.13/el6-x86_64/usr
 
 # Chirp certificates location
 export X509_USER_CERT=/etc/grid-security/chirp/hostcert.pem
@@ -35,12 +35,11 @@ CHIRP_PORT=9094
 CHIRP_MAX_CLIENTS=600
 
 # Maximum debug file size before rotating
-# Default: 0 to let logrotate handle this
+# (Let logrotate handle this)
 CHIRP_MAX_ROTATE=0
 #CHIRP_MAX_ROTATE=500M
 
-# Chirp Debug level
-CHIRP_DEBUG='auth'
+CHIRP_DEBUG_LEVEL='auth'
 
 # HDFS port
 CHIRP_HDFS_PORT=19000

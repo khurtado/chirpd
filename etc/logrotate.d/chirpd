@@ -1,4 +1,4 @@
-{
+/var/log/chirp/log.debug {
   missingok
   nomail
   nocreate
