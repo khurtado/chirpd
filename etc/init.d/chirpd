@@ -48,7 +48,7 @@ chirp_start()
 {
     printf "%-50s\n" "Starting chirpd..."
     check_directories
-    daemon --pidfile $CHIRP_PID --user uscms01 $CHIRP_BIN --inherit-default-acl --root=hdfs://${CHIRP_HDFS_HOST}:${CHIRP_HDFS_PORT}${CHIRP_HDFS_LOCATION} -A $CHIRP_DEFAULT_ACL -p $CHIRP_PORT -b -d $CHIRP_DEBUG_LEVEL -a globus -o $CHIRP_LOG -O $CHIRP_MAX_ROTATE -M $CHIRP_MAX_CLIENTS -B $CHIRP_PID
+    daemon --pidfile $CHIRP_PID --user uscms01 $CHIRP_BIN --inherit-default-acl --root=hdfs://${CHIRP_HDFS_HOST}:${CHIRP_HDFS_PORT}${CHIRP_HDFS_LOCATION} -A $CHIRP_DEFAULT_ACL -p $CHIRP_PORT -b -d "$CHIRP_DEBUG_LEVEL" -a globus -o $CHIRP_LOG -O $CHIRP_MAX_ROTATE -M $CHIRP_MAX_CLIENTS -B $CHIRP_PID
     # Sometimes, pid file takes a second to be created
     sleep 1
     ## Double check if PID in file is really running and delete PID file otherwise
