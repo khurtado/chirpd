@@ -20,8 +20,9 @@ export LIBHDFS_PATH=/usr/lib64/libhdfs.so
 # JAVA Paths
 export JAVA_HOME=/etc/alternatives/java_sdk
 
-# CCTOOLS Path
-CCTOOLS_HOME=/afs/crc.nd.edu/group/ccl/software/cctools
+# CHIRP BINARY
+#CCTOOLS_HOME=/afs/crc.nd.edu/group/ccl/software/cctools
+CHIRP_BIN=/afs/crc.nd.edu/group/ccl/software/x86_64/redhat6/cctools/lobster-140-8e7d5576-cvmfs-40cf5bba/bin/chirp_server
 # Default ACL file
 CHIRP_DEFAULT_ACL=/etc/chirp_acl
 
