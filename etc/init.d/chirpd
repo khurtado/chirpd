@@ -20,7 +20,7 @@ fi
 
 PIDDIR=/var/run/chirp
 CHIRP_PID=$PIDDIR/chirp.pid
-CHIRP_BIN=$CCTOOLS_HOME/x86_64/redhat6/bin/chirp_server
+CHIRP_BIN=$CCTOOLS_HOME/bin/chirp_server
 program='chirpd'
 
 check_directories()
